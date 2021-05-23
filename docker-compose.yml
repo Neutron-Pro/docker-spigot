@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+    spigot:
+        build: ./spigot
+        environment: 
+            RAM_MIN: 2G
+            RAM_MAX: 4G
+        ports:
+            - 25565:25565
+        volumes:
+            - ./minecraft/:/home/minecraft/
+        tty: true
+        stdin_open: true
