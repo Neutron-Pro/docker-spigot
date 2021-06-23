@@ -13,9 +13,12 @@ WORKDIR /home/minecraft
 ENV MC_RAM_MIN=512M
 ENV MC_RAM_MAX=1G
 
-COPY minecraft/ /home/minecraft/
-COPY --from=base /home/minecraft/server.jar /usr/bin
+RUN apt update && apt install --no-install-recommends -y screen
 
-ENTRYPOINT java -Xms${MC_RAM_MIN} -Xmx${MC_RAM_MAX} -jar /usr/bin/server.jar nogui
+COPY minecraft/ /home/minecraft/
+RUN chmod +x /home/minecraft/mc
+COPY --from=base /home/minecraft/server.jar /usr/bin/
+
+ENTRYPOINT screen -dmS server java -Xms${MC_RAM_MIN} -Xmx${MC_RAM_MAX} -jar /usr/bin/server.jar nogui && /bin/bash
 
 EXPOSE 25565/tcp
