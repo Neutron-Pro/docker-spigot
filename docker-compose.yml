@@ -2,13 +2,14 @@ version: '3.7'
 
 services:
     spigot:
-        build: ./spigot
+        build: ./.docker/spigot
         environment: 
-            RAM_MIN: 2G
-            RAM_MAX: 4G
+            MC_RAM_MIN: 2G
+            MC_RAM_MAX: 4G
         ports:
             - 25565:25565
         volumes:
-            - ./minecraft/:/home/minecraft/
+            - ./minecraft/plugins/:/home/minecraft/plugins/
+            - ./minecraft/logs/latest.log:/home/minecraft/logs/latest.log
         tty: true
         stdin_open: true
