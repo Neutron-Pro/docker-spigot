@@ -2,17 +2,12 @@
 
 ## Installation
 
+- Change settings in the ./docker/spigot/minecraft/server.properties file (DON'T TOUCH server-port) and yml configuration
+- place your world in ./docker/spigot/minecraft folder (no require)
+
 ```bash
 docker-compose up -d --build
 ```
-
-```bash
-docker-compose down
-```
-
-- Accept Eula in the minecraft folder
-- Change settings in the server.properties file (DON'T TOUCH server-port)
-- You can now restart the container
 
 ## Start
 
@@ -23,22 +18,13 @@ docker-compose up -d
 ## Perform a minecraft command
 
 ```bash
-docker attach <docker-name>
-```
-
-- You can now perform minecraft commands.
-
-```bash
-# Detach console:
-CTRL+P CTRL+Q
+docker exec -it spigot sh mc <Minecraft Command>
 ```
 
 ## Stop
 
 ```bash
-docker attach <docker-name>
-stop
-CTRL+P CTRL+Q
+docker exec -it spigot sh mc stop
 docker-compose down
 ```
 
@@ -46,6 +32,7 @@ docker-compose down
 
 From the docker-compose
   - Remove volumes key and value.
+  - Remove the container_name key.
   - Modify ports values:
 
 ```yml
