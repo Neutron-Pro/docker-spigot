@@ -1,10 +1,16 @@
-FROM debian:10 as base
+FROM openjdk:8 as base
+
+LABEL maintainer="NeutronStars <pro@neutronstars.fr>"
+
+ARG version
 
 WORKDIR /home/minecraft
 
 RUN apt update && \
-    apt install --no-install-recommends -y ca-certificates curl && \
-    curl -o server.jar https://cdn.getbukkit.org/spigot/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar
+    apt install --no-install-recommends -y ca-certificates curl git && \
+    curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar && \
+    java -jar BuildTools.jar --rev $version && \
+    mv spigot-${version}.jar server.jar
 
 FROM openjdk:8 as release
 

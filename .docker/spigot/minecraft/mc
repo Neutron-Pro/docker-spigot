@@ -1,3 +1,2 @@
-#!/usr/bash
-MC_COMMAND=$*
-screen -dr server -X stuff "${MC_COMMAND}\n"
+#!/bin/sh
+screen -dr server -X stuff "$*\n"

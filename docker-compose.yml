@@ -2,7 +2,11 @@ version: '3.7'
 
 services:
     spigot:
-        build: ./.docker/spigot
+        build:
+            context: ./.docker/spigot
+            dockerfile: Dockerfile
+            args:
+                version: 1.8.8
         container_name: spigot
         environment:
             MC_RAM_MIN: 2G
